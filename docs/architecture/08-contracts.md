@@ -92,10 +92,12 @@ Drafted (not merged):
 - `contracts/storage/mount-config.schema.json` and `contracts/storage/file-ops.schema.json` — the mount-plane mount config and file-op RPC (the file-op message bodies are tbd).
 - `contracts/storage/file-artifact-api.schema.json` — the Web UI file/artifact data plane (upload/list/download/getManifest/preview-render + the embed-token/CSP/CSRF envelope). Per-operation bodies are tbd, like the mount-plane RPC; the embed-token binding claim ([#217](https://github.com/Wide-Moat/open-computer-use/issues/217)) and preview-render parser isolation ([#218](https://github.com/Wide-Moat/open-computer-use/issues/218)) are tracked open items.
 - `contracts/audit/audit-fanin.asyncapi.yaml` — the OCSF fan-in (the compute-metering and saturation payloads are tbd, [#150](https://github.com/Wide-Moat/open-computer-use/issues/150)).
+- `contracts/openapi/operator-rest.openapi.yaml` and `contracts/openapi/soar-revoke.openapi.yaml` — the operator REST surface and the inbound SOAR-revoke surface ([#205](https://github.com/Wide-Moat/open-computer-use/issues/205)). The operator plane is a host-owned UDS, so neither carries a `servers` block.
+- `contracts/proto/ocu/control/session/v1/session_setup.proto` — the gateway→Control session set-up RPC (`Create`/`Route`/`Destroy`; the gateway carries service identity, no operator scope). The deny envelope is the `BoundedReason` proto-mirror of the shared JSON `BoundedReason` ([#205](https://github.com/Wide-Moat/open-computer-use/issues/205)).
 
 Not built:
 
-- `contracts/openapi/` (operator REST + SOAR revoke) and `contracts/proto/` (session set-up) — [#205](https://github.com/Wide-Moat/open-computer-use/issues/205). Egress secret delivery is off-the-shelf Envoy SDS, not an OCU contract file.
+- Egress secret delivery is off-the-shelf Envoy SDS, not an OCU contract file.
 - The transparency-log submission envelope — [#151](https://github.com/Wide-Moat/open-computer-use/issues/151).
 - Mock / conformance servers per surface for consumer CI — [#206](https://github.com/Wide-Moat/open-computer-use/issues/206).
 - The `SkillProvider` contract is a v1 non-goal; skills load from a customer-provided registry, so no skill-format schema ships in v1.
